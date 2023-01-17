@@ -1,0 +1,10 @@
+# Default ignored files
+
+#ignore all xml files
+.xml
+
+!README.md
+
+target/
+
+
