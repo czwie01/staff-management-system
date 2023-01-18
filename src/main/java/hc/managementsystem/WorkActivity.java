@@ -1,4 +1,4 @@
 package hc.managementsystem;
 
-public class Taetigkeit {
+public class WorkActivity {
 }

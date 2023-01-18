@@ -2,13 +2,13 @@ package hc.managementsystem;
 
 import java.util.Map;
 
-public class Projekt {
+public class Project {
     private String Name;
     private double projektStunden;
     private String projektBeschreibung;
 
-    private Map<Mitarbeiter, Integer> StundenJeMitarbeiterMap;
+    private Map<StaffMember, Integer> StundenJeMitarbeiterMap;
 
-    public Projekt() {
+    public Project() {
     }
 }

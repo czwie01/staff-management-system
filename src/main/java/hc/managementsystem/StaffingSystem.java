@@ -1,5 +1,4 @@
 package hc.managementsystem;
 
-public class Krankenstand
-{
+public class StaffingSystem {
 }
