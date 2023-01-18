@@ -1,6 +1,7 @@
 package hc.managementsystem;
 
 import java.util.LinkedList;
+import java.util.Objects;
 
 public class StaffMember implements Comparable<StaffMember>{
     private String name;
@@ -11,19 +12,30 @@ public class StaffMember implements Comparable<StaffMember>{
     private boolean isActive = true;
     private boolean isOnVacation = false;
     private boolean isOnSickLeave = true;
+
     public StaffMember(String name, String surname, String street, String houseNumber, String postalCode) {
         this.name = name;
         this.surname = surname;
-        String adressname = name+" "+surname;
-        this.address = new Address(adressname, street, houseNumber, postalCode);
+        String adressName = name+" "+surname;
+        this.address = new Address(adressName, street, houseNumber, postalCode);
     }
 
     public StaffMember(String name, String surname, Address address) {
         this.name = name;
         this.surname = surname;
+        try {
+            if(address.getName().equals(this.name+" "+this.surname)){
+                this.address = address;
+            }
+            else {
+                throw new IllegalArgumentException();
+            }
+        }
+        catch (IllegalArgumentException e) {
+            System.out.println("Name stated in Address does not match name surname of StaffMember Object");
+        }
         this.address = address;
     }
-
 
     public Address getAddress() {
         return this.address;
@@ -79,4 +91,23 @@ public class StaffMember implements Comparable<StaffMember>{
 
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        if (this.getClass() != o.getClass()) return false;
+        StaffMember staffMember = (StaffMember) o;
+        return this.name.equals(staffMember.getName())
+                && this.surname.equals(staffMember.getSurname())
+                && this.address.equals(staffMember.getAddress());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.name,
+                this.surname,
+                this.address);
+    }
+
 }

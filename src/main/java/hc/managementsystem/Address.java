@@ -85,6 +85,7 @@ public class Address implements Comparable<Address> {
                 && this.postalCode.equals(address.getPostalCode());
     }
 
+    @Override
     public int hashCode() {
         return Objects.hash(this.name,
                 this.street,
