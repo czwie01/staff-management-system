@@ -4,38 +4,70 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class CustomerManagementSystem {
-    private final List<Customer> kundenListe = new LinkedList<>();
+    private final List<Customer> customerList = new LinkedList<>();
 
 
-    public void kundenAnlegen(Customer neuerCustomer) {
-        if(getKundenIndex(neuerCustomer) >= 0) {
-            this.kundenListe.add(neuerCustomer);
-        }
-        else {
-            System.out.println("Kunde bereits im System enthalten.");
-        }
-
-    }
-
-    public void kundenEntfernen(Customer customer){
-        if( this.getKundenIndex(customer) >= 0){
-            this.kundenListe.remove(this.getKundenIndex(customer));
+    public void addCustomer(Customer newCustomer) {
+        if(!customerList.contains(newCustomer)) {
+            customerList.add(newCustomer);
         }
         else{
-            //LoggerInfo stattdessen
-            System.out.println("Zu entfernender Kunde nicht gefunden");
+            throw new IllegalArgumentException("Customer Entry already exists in the System.");
         }
     }
 
-    private int getKundenIndex(Customer customer){
-        for(int i = 0; i < this.kundenListe.size() - 1; i++){
-            if(this.kundenListe.get(i).compareTo(customer) == 0) {
-                return i;
+    public void addCustomer(String name, Address address) {
+        Customer newCustomer = new Customer(name, address);
+        if(!customerList.contains(newCustomer)) {
+            customerList.add(newCustomer);
+        }
+        else{
+            throw new IllegalArgumentException("Customer Entry already exists in the System.");
+        }
+    }
+
+    public void addCustomer(String name, String street, String houseNumber, String postalCode) {
+        Customer newCustomer = new Customer(name, street, houseNumber, postalCode);
+        if(!customerList.contains(newCustomer)) {
+            customerList.add(newCustomer);
+        }
+        else{
+            throw new IllegalArgumentException("Customer Entry already exists in the System.");
+        }
+    }
+
+    public void changeCustomerDetails(Customer customer,String nameOfDetails, String detailsChange) {
+
+        int indexOfCustomer = customerList.indexOf(customer);
+
+        if(indexOfCustomer > -1) {
+
+            Address address = customer.getAddress();
+
+            switch(detailsChange) {
+                case "Name":
+                    customer.setName(detailsChange);
+                    address.setName(detailsChange);
+                    break;
+
+                case "Street":
+                    address.setStreet(detailsChange);
+                    break;
+
+                case "House Number":
+                    address.setHouseNumber(detailsChange);
+                    break;
+
+                case "Postal Code":
+                    address.setPostalCode(detailsChange);
+                    break;
+
+                default:
+                    throw new IllegalArgumentException("Name of details should be: \"Name\", \"Street\" ,\"House Number\", or \"Postal Code\" " );
             }
         }
-        return -1;
+        else {
+            throw new IllegalArgumentException("No entry for specified Customer in the system");
+        }
     }
-
-
-
 }

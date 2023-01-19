@@ -7,22 +7,32 @@ public class StaffMember implements Comparable<StaffMember>{
     private String name;
     private String surname;
     private Address address;
+    private String role;
     private LinkedList<Object> activitiesAndProjects;
-
+    private WorkTime workTime;
     private boolean isActive = true;
     private boolean isOnVacation = false;
     private boolean isOnSickLeave = true;
 
-    public StaffMember(String name, String surname, String street, String houseNumber, String postalCode) {
+    public StaffMember(String name, String surname, String street, String houseNumber, String postalCode, String role, double contractHours) {
         this.name = name;
         this.surname = surname;
         String adressName = name+" "+surname;
         this.address = new Address(adressName, street, houseNumber, postalCode);
+        this.role = role;
+        if(contractHours > 0) {
+            this.workTime = new WorkTime(contractHours);
+        }
+        else {
+            throw new IllegalArgumentException("contractHours have to be above zero hours.");
+        }
+
     }
 
-    public StaffMember(String name, String surname, Address address) {
+    public StaffMember(String name, String surname, Address address, String role, double contractHours) {
         this.name = name;
         this.surname = surname;
+        this.role = role;
         try {
             if(address.getName().equals(this.name+" "+this.surname)){
                 this.address = address;
@@ -73,8 +83,13 @@ public class StaffMember implements Comparable<StaffMember>{
         this.surname = surname;
     }
 
+    public String toString(){
+        return this.name+" "+this.surname;
+    }
+
     @Override
     public int compareTo(StaffMember o) {
+
         if(this.name.compareTo(o.getName()) !=0) {
 
             return this.name.compareTo(o.getName());
@@ -94,10 +109,15 @@ public class StaffMember implements Comparable<StaffMember>{
 
     @Override
     public boolean equals(Object o) {
+
         if (this == o) return true;
+
         if (o == null) return false;
+
         if (this.getClass() != o.getClass()) return false;
+
         StaffMember staffMember = (StaffMember) o;
+
         return this.name.equals(staffMember.getName())
                 && this.surname.equals(staffMember.getSurname())
                 && this.address.equals(staffMember.getAddress());
@@ -105,6 +125,7 @@ public class StaffMember implements Comparable<StaffMember>{
 
     @Override
     public int hashCode() {
+
         return Objects.hash(this.name,
                 this.surname,
                 this.address);

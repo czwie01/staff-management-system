@@ -54,7 +54,7 @@ public class AddressTestCases {
 
         Address d = null;
 
-        StaffMember e = new StaffMember("nameA","surnameA",c);
+        StaffMember e = new StaffMember("nameA","surnameA",c,"roleA", 40);
 
         assertAll("Test equals method",
             ()-> assertEquals("Equal Addresses asserted equal", a, b),
