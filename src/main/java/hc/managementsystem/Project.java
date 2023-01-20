@@ -41,7 +41,7 @@ public class Project {
 
     public void addStaffMemberToProject(StaffMember staffMember){
         if(assignedStaffMembersList.contains(staffMember)){
-            throw new IllegalArgumentException("Staff member is already assigned to this project.")
+            throw new IllegalArgumentException("Staff member is already assigned to this project.");
         }
         else{
             assignedStaffMembersList.add(staffMember);
@@ -50,7 +50,7 @@ public class Project {
 
     public void removeStaffMemberFromProject(StaffMember staffMember){
         if(!assignedStaffMembersList.contains(staffMember)){
-            throw new IllegalArgumentException("Staff member is not assigned to this project.")
+            throw new IllegalArgumentException("Staff member is not assigned to this project.");
         }
         else{
             assignedStaffMembersList.remove(staffMember);
@@ -63,7 +63,7 @@ public class Project {
 
     public void addProjectHours(double addedProjectHours) {
         if(this.projectHours + addedProjectHours < 0.0){
-            throw new IllegalArgumentException("Booked project hours cannot be negative.")
+            throw new IllegalArgumentException("Booked project hours cannot be negative.");
         }
         else{
             this.projectHours = this.projectHours + addedProjectHours;
@@ -73,6 +73,10 @@ public class Project {
     public String toString(){
         String projectString = "Project name: "+ this.name;
         return projectString;
+    }
+
+    public boolean isAssignedStaffMember(StaffMember staffMember){
+        return this.assignedStaffMembersList.contains(staffMember);
     }
 
     @Override

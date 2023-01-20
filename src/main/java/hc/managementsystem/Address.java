@@ -48,6 +48,11 @@ public class Address implements Comparable<Address> {
         this.postalCode = postalCode;
     }
 
+    String getAddressLine(){
+        return this.name+" "+this.street+" "+this.houseNumber+" "+this.postalCode;
+    }
+
+
 
     @Override
     public int compareTo(Address o) {
